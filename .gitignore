@@ -1,3 +1,9 @@
+# LLMs
+vosk-model-en-us-0.42-gigaspeech
+
+# Other junk
+.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
