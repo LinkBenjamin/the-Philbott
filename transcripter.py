@@ -138,7 +138,7 @@ class Transcripter():
 
     def cutClip(self, start_time, end_time, output_file):
         runtime = end_time - start_time
-        buffer = (45 - runtime) / 2 
+        buffer = (25 - runtime) / 2 
         start_time = max(start_time - buffer, 0)
         end_time = end_time + buffer
         subprocess.run([

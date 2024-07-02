@@ -45,4 +45,4 @@ python main.py --file=path/to/your/video-file.mp4
 
 > Note that it can take a while to process, depending on the size of your file!  A 30-minute video on a Macbook M2 ran for about 2 minutes.
 
-When it's complete, you'll have a series of new .txt files in the project root as well as some 45-second-long mp4s.
+When it's complete, you'll have a series of new .txt files in the project root as well as some 25-second-long mp4s.
