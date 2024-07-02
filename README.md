@@ -35,6 +35,14 @@ pip install -r requirements.txt
 
 4. Install [ffmpeg](https://ffmpeg.org/download.html), which is used for extracting the audio from the video file as well as cutting the short-form clips.
 
+5. Install [Ollama](https://ollama.com).
+
+6. From a command prompt, run the following:
+
+`ollama pull llama3`
+
+This will cause Ollama to run a background process on your machine with the Llama3 model listening for inputs from the program.  **Ollama *must* be running for the Philbott to work!**
+
 ## How to run the Philbott
 
 From your command prompt, you run:
