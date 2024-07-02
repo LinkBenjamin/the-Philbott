@@ -50,15 +50,21 @@ def main(args):
     rag = RagModelApp(script)
     rag.prepare_chain()
     
-    prompt1 = "Summarize this content in 4-5 sentences.  What are the main themes?"
+    prompt1 = "Summarize this content in 4-8 sentences in a style consistent with Youtube video description fields.  What are the main themes?  What are the lessons learned?"
     saveTranscriptFile("Summary.txt", f"{prompt1}:\n\n{rag.invoke(prompt1)}")
 
     prompt2 = "Create a clickbait-style title for this content based on its main themes."
     saveTranscriptFile("Title.txt", f"{prompt2}:\n\n{rag.invoke(prompt2)}")
-    
-    prompt3 = "Select 3 potential quotable moments that would make great short-form social media content.  Respond with a pipe-delimited list of the direct transcript quotations ONLY.  Do NOT format or add notes or alter the original text in any way."
+
+    prompt3 = "If this video were uploaded to youtube, what hashtags would you select to maximize its reach?"
+    saveTranscriptFile("Hashtags.txt", f"{prompt3}:\n\n{rag.invoke(prompt3)}")
+
+    prompt4 = "Select 3 potential quotable moments that would make great short-form social media content.  Respond with a pipe-delimited list of the direct transcript quotations ONLY.  Do NOT format or add notes or alter the original text in any way."
     x = rag.invoke("Select 3 potential quotable moments that would make great short-form social media content.  Respond with a pipe-delimited list of the direct transcript quotations ONLY.  Do NOT format or add notes or alter the original text in any way.")
-    saveTranscriptFile("Quotables.txt", f"{prompt3}:\n\n{rag.invoke(prompt3)}")
+    saveTranscriptFile("Quotables.txt", f"{prompt4}:\n\n{rag.invoke(prompt4)}")
+
+    prompt5 = "Create a list of discussion questions based on the content for viewers to consider.  The questions should be a bit open-ended and designed for use in a small group or family setting."
+    saveTranscriptFile("DiscussionQuestions.txt", f"{prompt5}:\n\n{rag.invoke(prompt5)}")
 
     y = x.split("|")
     for index, quote in enumerate(y):
