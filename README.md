@@ -6,9 +6,11 @@ This is a script that, in conjunction with a [vosk](https://github.com/alphacep/
 
 - A Transcript of the video
 - A Clickbait Title based on the themes in the transcript
-- A 4-5 sentence summary suitable for a youtube description field.
+- A list of suggested hashtags to apply to your upload
+- A 4-8 sentence summary suitable for a youtube description field
 - A list of 'quotable moments' in the video
 - Clips of the video containing those quotable moments in a 45-second file suitable for a tiktok/reel type upload
+- A list of discussion questions about the content
 
 ## What it's made of
 
