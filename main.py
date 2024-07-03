@@ -34,14 +34,12 @@ def main(args):
     
     logger.info("Starting the script...")
     
-    # Example functionality
     if args.file:
         t = Transcripter(args.file)
         script = t.transcribe()
-
-    if args.youtubeid:
-        t = YouTubeTranscriber()
-        script = t.transcribe(args.youtubeid)
+    else:
+        logger.error("You must provide an input file using the 'file' command line parameter.")
+        sys.exit(0)
     
     if args.outputfolder:
         output_folder = args.outputfolder
@@ -49,7 +47,11 @@ def main(args):
         output_folder = "outputs"
 
     if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
+        try:
+            os.makedirs(output_folder)
+        except NotADirectoryError:
+            logger.error(f"The content of the outputfolder parameter ( {output_folder} ) was not valid.  A directory cannot be constructed there.")
+            sys.exit(0)
 
     saveTranscriptFile(os.path.join(output_folder,"transcript.txt"), script)
 

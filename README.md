@@ -50,9 +50,11 @@ This will cause Ollama to run a background process on your machine with the Llam
 From your command prompt, you run:
 
 ```bash
-python main.py --file=path/to/your/video-file.mp4
+python main.py --file=path/to/your/video-file.mp4 --outputfolder=/path/to/destination/folder
 ```
 
-> Note that it can take a while to process, depending on the size of your file!  A 30-minute video on a Macbook M2 ran for about 2 minutes.
+> NOTE: the `outputfolder` parameter is optional - if you don't provide it, the Philbott will output its results to an "outputs" folder in the project root.  If the folder already exists it will use it; if it does not exist, it will be created.  You can provide your path as absolute or relative by adding or omitting a leading '/' character... `/home/Ben/Documents` is an absolute path while `home/Ben/Documents` is relative to the current working directory.
+
+The Philbott can take a while to process, depending on the size of your file!  A 30-minute video on a Macbook M2 ran for about 2 minutes.
 
 When it's complete, you'll have a series of new .txt files in the project root as well as some 25-second-long mp4s.
