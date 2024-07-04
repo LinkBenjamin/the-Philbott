@@ -1,0 +1,19 @@
+prompts:
+  - type: SimpleText
+    instructions: Summarize this content in 4-8 sentences in a style consistent with Youtube video description fields.  What are the main themes?  What are the lessons learned?
+    outputfilename: Summary.txt
+  - type: SimpleText
+    instructions: Create a clickbait-style title for this content based on its main themes.
+    outputfilename: Title.txt
+  - type: SimpleText
+    instructions: If this video were uploaded to youtube, what hashtags would you select to maximize its reach?
+    outputfilename: Hashtags.txt
+  - type: SimpleText
+    instructions: Create a list of discussion questions based on the content for viewers to consider.  The questions should be a bit open-ended and designed for use in a small group or family setting.
+    outputfilename: DiscussionQuestions.txt
+  - type: VideoClipArray
+    instructions: Select 3 potential quotable moments that would make great short-form social media content.  Use direct transcript quotations ONLY, do not format or add notes or alter the original text in any way.
+    count: 3
+    outputfilename: Quotables.txt
+    videoclipnamepattern: quote
+    videoextension: .mp4
