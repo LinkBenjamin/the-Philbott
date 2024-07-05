@@ -47,13 +47,34 @@ This will cause Ollama to run a background process on your machine with the Llam
 
 ## How to run the Philbott
 
+### The Config File
+`config.yaml` is how you define what prompts are used by the system to create your outputs.  The opening of a config is ALWAYS defining the list of 'prompts' as follows:
+
+```yaml
+prompts:
+```
+
+Beneath this 'prompts' label is a repeating list of individual configuration values.  Yaml starts each entry with a hyphen and then lists the name/value pairs, one on each line.
+
+The first entry in every prompt is its 'type'.We currently support the following types:
+
+| Type | Description |
+|---|---|
+| SimpleText | This is a prompt that will return text from the LLM.  It's a Q&A, or summary, or similar conversation where the response is always text that we use for something.
+| VideoClipArray | This is a prompt that returns a pipe (`|`) delimited list of inputs to be passed to our video-clip finder.  This can be used for cases like "find a quotable moment" or "locate the point where a key point was made".  You can match up the count of elements.  Your prompt will be modified to request the pipe-delimited output format before being sent to the LLM.
+
+
+### Kicking off the process
 From your command prompt, you run:
 
 ```bash
-python main.py --file=path/to/your/video-file.mp4 --outputfolder=/path/to/destination/folder
+python main.py 
+  --file=path/to/your/video-file.mp4 
+  --config=path/to/your/config.yaml
+  --outputfolder=/path/to/destination/folder
 ```
 
-> NOTE: the `outputfolder` parameter is optional - if you don't provide it, the Philbott will output its results to an "outputs" folder in the project root.  If the folder already exists it will use it; if it does not exist, it will be created.  You can provide your path as absolute or relative by adding or omitting a leading '/' character... `/home/Ben/Documents` is an absolute path while `home/Ben/Documents` is relative to the current working directory.
+> NOTE: the `outputfolder` parameter is optional - if you don't provide it, the Philbott will output its results to an "outputs" folder that it creates in the project root.  If the folder already exists it will use it; if it does not exist, it will be created.  You can provide your path as absolute or relative by adding or omitting a leading '/' character... `/home/Ben/Documents` is an absolute path while `home/Ben/Documents` is relative to the current working directory.
 
 The Philbott can take a while to process, depending on the size of your file!  A 30-minute video on a Macbook M2 ran for about 2 minutes.
 
