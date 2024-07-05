@@ -2,14 +2,12 @@ import os
 import argparse
 import logging
 import sys
-import json
 import yaml
 
-from transcripter import Transcripter
-from tubescriber import YouTubeTranscriber
-from ragmodelapp import RagModelApp
+from modules.transcripter import Transcripter
+from modules.ragmodelapp import RagModelApp
 
-def setup_logging(level=logging.ERROR):
+def setup_logging(level):
     """
     Set up the logging configuration.
     """
@@ -94,35 +92,6 @@ def main(args):
                         t.cutClip(stamp[0], stamp[1], os.path.join(output_folder, filename))
                     else:
                         print("Skipping because None is one of the stamps.")
-
-    # prompt1 = "Summarize this content in 4-8 sentences in a style consistent with Youtube video description fields.  What are the main themes?  What are the lessons learned?"
-    # saveTranscriptFile(os.path.join(output_folder, "Summary.txt"), f"{prompt1}:\n\n{rag.invoke(prompt1)}")
-
-    # prompt2 = "Create a clickbait-style title for this content based on its main themes."
-    # saveTranscriptFile(os.path.join(output_folder, "Title.txt"), f"{prompt2}:\n\n{rag.invoke(prompt2)}")
-
-    # prompt3 = "If this video were uploaded to youtube, what hashtags would you select to maximize its reach?"
-    # saveTranscriptFile(os.path.join(output_folder, "Hashtags.txt"), f"{prompt3}:\n\n{rag.invoke(prompt3)}")
-
-    # prompt4 = "Select 3 potential quotable moments that would make great short-form social media content.  Respond with a pipe-delimited list of the direct transcript quotations ONLY.  Do NOT format or add notes or alter the original text in any way."
-    # x = rag.invoke("Select 3 potential quotable moments that would make great short-form social media content.  Respond with a pipe-delimited list of the direct transcript quotations ONLY.  Do NOT format or add notes or alter the original text in any way.")
-    # saveTranscriptFile(os.path.join(output_folder, "Quotables.txt"), f"{prompt4}:\n\n{rag.invoke(prompt4)}")
-
-    # prompt5 = "Create a list of discussion questions based on the content for viewers to consider.  The questions should be a bit open-ended and designed for use in a small group or family setting."
-    # saveTranscriptFile(os.path.join(output_folder, "DiscussionQuestions.txt"), f"{prompt5}:\n\n{rag.invoke(prompt5)}")
-
-    # y = x.split("|")
-    # for index, quote in enumerate(y):
-    #     print(f"Index: {index}, Quote: {quote}")
-    #     if quote:
-    #         q = quote.replace(",","").replace(".","").replace("!","")
-    #         stamp = t.findStringTimestamps(quote)
-    #         print(stamp)
-    #         if stamp[0] is not None and stamp[1] is not None:
-    #             filename = f"q{index}.mp4"
-    #             t.cutClip(stamp[0], stamp[1], os.path.join(output_folder, filename))
-    #         else:
-    #             print("Skipping because None is one of the stamps.")
 
     logger.info("Script finished successfully.")
 

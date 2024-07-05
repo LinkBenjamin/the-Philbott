@@ -1,6 +1,9 @@
 # LLMs
 vosk-model-en-us-0.42-gigaspeech
 
+# Test data inputs folder
+test_videos/
+
 # Other junk
 .DS_Store
 
