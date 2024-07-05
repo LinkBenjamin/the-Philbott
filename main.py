@@ -34,7 +34,7 @@ def main(args):
     """
     Main function to execute the script logic.
     """
-    setup_logging()
+    setup_logging(logging.ERROR)
     logger = logging.getLogger(__name__)
     
     logger.info("Starting the script...")
