@@ -37,6 +37,7 @@ humanfriendly==10.0
 idna==3.7
 importlib_metadata==7.1.0
 importlib_resources==6.4.0
+iniconfig==2.0.0
 Jinja2==3.1.4
 jsonpatch==1.33
 jsonpointer==3.0.0
@@ -72,6 +73,7 @@ opentelemetry-util-http==0.46b0
 orjson==3.10.5
 overrides==7.7.0
 packaging==24.1
+pluggy==1.5.0
 posthog==3.5.0
 protobuf==4.25.3
 pyasn1==0.6.0
@@ -83,6 +85,7 @@ pydub==0.25.1
 Pygments==2.18.0
 PyPika==0.48.9
 pyproject_hooks==1.1.0
+pytest==8.2.2
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 python-multipart==0.0.9
