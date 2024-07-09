@@ -43,6 +43,8 @@ pip install -r requirements.txt
 
 `ollama pull llama3`
 
+(You can of course swap out llama3 with any other LLM that you like, as long as Ollama uses `localhost:11434` to provide an interface to it.)
+
 This will cause Ollama to run a background process on your machine with the Llama3 model listening for inputs from the program.  **Ollama *must* be running for the Philbott to work!**
 
 ## How to run the Philbott
@@ -61,7 +63,7 @@ The first entry in every prompt is its 'type'.We currently support the following
 | Type | Description |
 |---|---|
 | SimpleText | This is a prompt that will return text from the LLM.  It's a Q&A, or summary, or similar conversation where the response is always text that we use for something.
-| VideoClipArray | This is a prompt that returns a pipe (`|`) delimited list of inputs to be passed to our video-clip finder.  This can be used for cases like "find a quotable moment" or "locate the point where a key point was made".  You can match up the count of elements.  Your prompt will be modified to request the pipe-delimited output format before being sent to the LLM.
+| VideoClipArray | This is a prompt that returns a pipe (`\|`) delimited list of inputs to be passed to our video-clip finder.  This can be used for cases like "find a quotable moment" or "locate the point where a key point was made".  You can match up the count of elements.  Your prompt will be modified to request the pipe-delimited output format before being sent to the LLM.
 
 
 ### Kicking off the process

@@ -11,6 +11,9 @@ prompts:
   - type: SimpleText
     instructions: Create a list of discussion questions based on the content for viewers to consider.  The questions should be a bit open-ended and designed for use in a small group or family setting.
     outputfilename: DiscussionQuestions.txt
+  - type: SimpleText
+    instructions: Impersonate the speaker from this message, using their tone and style, and write an invitation email to invite people to next week's message.
+    outputfilename: Invitation.txt
   - type: VideoClipArray
     instructions: Select 3 potential quotable moments that would make great short-form social media content.  Use direct transcript quotations ONLY, do not format or add notes or alter the original text in any way.
     count: 3
