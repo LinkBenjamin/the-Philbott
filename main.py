@@ -91,7 +91,21 @@ def main(args):
                         filename = f"{prompt['videoclipnamepattern']}{index}{prompt['videoextension']}"
                         t.cutClip(stamp[0], stamp[1], os.path.join(output_folder, filename))
                     else:
-                        print("Skipping because None is one of the stamps.")
+                        print("Trying the two halves of the quote because I can't find the full quote.")
+                        mid = len(q) // 2
+                        q1 = q[:mid]
+                        q2 = q[mid:]
+                        st1 = t.findStringTimestamps(q1)
+                        st2 = t.findStringTimestamps(q2)
+                        if st1[0] is not None and st1[1] is not None:
+                            filename = f"{prompt['videoclipnamepattern']}{index}{prompt['videoextension']}"
+                            t.cutClip(st1[0], st1[1], os.path.join(output_folder, filename))
+                        elif st2[0] is not None and st2[1] is not None:
+                            filename = f"{prompt['videoclipnamepattern']}{index}{prompt['videoextension']}"
+                            t.cutClip(st2[0], st2[1], os.path.join(output_folder, filename))
+                        else:
+                            print("Couldn't even find half the quote.  Sorry boss.")
+
 
     logger.info("Script finished successfully.")
 
