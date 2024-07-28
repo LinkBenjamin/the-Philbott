@@ -1,4 +1,5 @@
 import os
+import sys
 import wave
 import json
 import subprocess
@@ -8,8 +9,8 @@ from pydub import AudioSegment
 
 MODEL_FOLDER = "vosk-model-en-us-0.42-gigaspeech"
 AUDIO_FORMAT = "wav"
-AUDIO_FILE = "audio.wav"
-AUDIO_FILE_2 = "audio2.wav"
+AUDIO_FILE = os.path.join("","audio.wav")
+AUDIO_FILE_2 = os.path.join("","audio2.wav")
 AUDIO_FRAME_RATE = 16000
 
 class Transcripter():
@@ -23,15 +24,33 @@ class Transcripter():
 
     def getAudio(self):
         print("ffmpeg is extracting the audio.")
-        subprocess.run(["ffmpeg", "-i", self.file, "-q:a", "0", "-map", "a", AUDIO_FILE], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        subprocess.run(["ffmpeg", "-i", self.file, "-q:a", "0", "-map", "a", AUDIO_FILE], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+        print("ffmpeg complete.")
+        if os.path.exists(AUDIO_FILE):
+            print(f"WAV CREATED: {AUDIO_FILE}")
+        else:
+            print(f"WAV FAILURE: {AUDIO_FILE}")
 
     def transcribe(self):
         self.getAudio()
         
         # Convert audio file to desired format if needed
         audio = AudioSegment.from_file(AUDIO_FILE)
-        audio = audio.set_frame_rate(AUDIO_FRAME_RATE).set_channels(1)
-        print("Audio converted to mono")
+        
+        # Set frame rate
+        try:
+            audio = audio.set_frame_rate(16000)
+            print("Frame rate set successfully.")
+        except Exception as e:
+            print(f"Error setting frame rate: {e}")
+
+        # Set channels to mono
+        try:
+            audio = audio.set_channels(1)
+            print("Channels set successfully.")
+        except Exception as e:
+            print(f"Error setting channels: {e}")
+        
         audio.export(AUDIO_FILE_2, format=AUDIO_FORMAT)
         
         # Initialize Vosk recognizer
@@ -42,7 +61,10 @@ class Transcripter():
         wf = wave.open(AUDIO_FILE_2, "rb")
         if wf.getnchannels() != 1 or wf.getsampwidth() != 2 or wf.getcomptype() != "NONE":
             print("Audio file must be WAV format mono PCM.")
-            exit(1)
+            print(f"Channels found (1 required): {wf.getnchannels()}")
+            print(f"Sample Width   (2 required): {wf.getsampwidth()}")
+            print(f"CompType    (NONE required): {wf.getcomptype()}")
+            sys.exit(1)
 
         # Print audio file properties for debugging
         print(f"Sample Rate: {wf.getframerate()}, Channels: {wf.getnchannels()}, Sample Width: {wf.getsampwidth()}, Compression Type: {wf.getcomptype()}")
@@ -50,22 +72,25 @@ class Transcripter():
         # Read and process the audio file in chunks
         results = []
         timestamps = []
+        x=0
         while True:
+            x = x+1
             data = wf.readframes(4000)
             if len(data) == 0:
                 break
             if rec.AcceptWaveform(data):
                 result = rec.Result()
-                print(f"Result: {result}")  # Print full result for debugging
+                print(f"Still processing ({x})")
+                # print(f"Result: {result}")  # Print full result for debugging
                 results.append(json.loads(result))
             else:
                 partial_result = rec.PartialResult()
 
         # Get the final result and check its content
         final_result = rec.FinalResult()
-        print(f"Raw Final Result: {final_result}")  # Print raw final result for debugging
+        # print(f"Raw Final Result: {final_result}")  # Print raw final result for debugging
         final_result_json = json.loads(final_result)
-        print(f"Final Result JSON: {final_result_json}")
+        # print(f"Final Result JSON: {final_result_json}") # Print in json for debugging
 
         # Add the final result to the results list if it's not empty
         if final_result_json:
@@ -80,7 +105,7 @@ class Transcripter():
                 for word in res['result']:
                     word_tuple = (word['word'], word['start'], word['end'])
                     timestamps.append(word_tuple)
-                    print(f"Word Tuple: {word_tuple}")
+                    # print(f"Word Tuple: {word_tuple}") # This is here for debugging, if needed
 
         # Close the audio file
         wf.close()

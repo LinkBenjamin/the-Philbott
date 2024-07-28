@@ -8,7 +8,7 @@ from langchain.chains import create_retrieval_chain
 from langchain import hub
 from langchain.chains.combine_documents import create_stuff_documents_chain
 
-MODEL_ID = 'llama3'
+MODEL_ID = 'llama3.1'
 BASE_URL = 'http://127.0.0.1:11434'
 CHUNK_SIZE = 512
 CHUNK_OVERLAP = 128
