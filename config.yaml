@@ -14,9 +14,12 @@ prompts:
   - type: SimpleText
     instructions: Impersonate the speaker from this message, using their tone and style, and write an invitation email to invite people to next week's message.
     outputfilename: Invitation.txt
+  - type: SimpleText
+    instructions: The speaker in this video usually preaches sequentially through a book of the Bible, one chapter per week.  Based on this information, provide an outline of the passage for next week's message, showing main themes and key characters or topics.
+    outputfilename: NextWeek.txt
   - type: VideoClipArray
-    instructions: Select 3 potential quotable moments that would make great short-form social media content.  Use direct transcript quotations ONLY, do not format or add notes or alter the original text in any way.
-    count: 3
+    instructions: Select 5 important quotable moments that we can use for short-form social media content.  Use direct transcript quotations ONLY, do not format or add notes or alter the original text in any way.
+    count: 5
     outputfilename: Quotables.txt
     videoclipnamepattern: quote
     videoextension: .mp4

@@ -40,7 +40,7 @@ def main(args):
     logger.info("Starting the script...")
     
     if args.file:
-        t = Transcripter(args.file)
+        t = Transcripter(os.path.join('',args.file))
         script = t.transcribe()
     else:
         logger.error("You must provide an input file using the 'file' command line parameter.")
@@ -93,18 +93,22 @@ def main(args):
                     else:
                         print("Trying the two halves of the quote because I can't find the full quote.")
                         mid = len(q) // 2
-                        q1 = q[:mid]
-                        q2 = q[mid:]
+                        space_index = q.find(' ', mid)
+                        q1 = q[:space_index]
+                        print(f"Q1: {q1}")
+                        q2 = q[space_index:]
+                        print(f"Q2: {q2}")
                         st1 = t.findStringTimestamps(q1)
                         st2 = t.findStringTimestamps(q2)
                         if st1[0] is not None and st1[1] is not None:
                             filename = f"{prompt['videoclipnamepattern']}{index}{prompt['videoextension']}"
                             t.cutClip(st1[0], st1[1], os.path.join(output_folder, filename))
-                        elif st2[0] is not None and st2[1] is not None:
-                            filename = f"{prompt['videoclipnamepattern']}{index}{prompt['videoextension']}"
-                            t.cutClip(st2[0], st2[1], os.path.join(output_folder, filename))
                         else:
-                            print("Couldn't even find half the quote.  Sorry boss.")
+                            if st2[0] is not None and st2[1] is not None:
+                                filename = f"{prompt['videoclipnamepattern']}{index}{prompt['videoextension']}"
+                                t.cutClip(st2[0], st2[1], os.path.join(output_folder, filename))
+                            else:
+                                print("Couldn't even find half the quote.  Sorry boss.")
 
 
     logger.info("Script finished successfully.")
