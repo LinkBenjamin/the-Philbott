@@ -15,6 +15,9 @@ prompts:
     instructions: Impersonate the speaker from this message, using their tone and style, and write an invitation email to invite people to next week's message.
     outputfilename: Invitation.txt
   - type: SimpleText
+    instructions: Write a blog post approximately 1200 words long which covers the content of the message.  The goal of this blog post is to provide the same general content but in written form instead of video.  You can use a mild informal style - don't fully mimic the speaker, but imagine how they would write the blog if they were trying to be professional about their writing.
+    outputfilename: Blog.txt 
+  - type: SimpleText
     instructions: The speaker in this video usually preaches sequentially through a book of the Bible, one chapter per week.  Based on this information, provide an outline of the passage for next week's message, showing main themes and key characters or topics.
     outputfilename: NextWeek.txt
   - type: VideoClipArray
