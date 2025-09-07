@@ -1,0 +1,16 @@
+prompts:
+  - type: SimpleText
+    instructions: Summarize this content in 4-8 sentences in a style consistent with Youtube video description fields.  If the speaker mentions anything that should be in the description, make a note of it.
+    outputfilename: Summary.txt
+  - type: SimpleText
+    instructions: If this video were uploaded to youtube, what hashtags would you select to maximize its reach?
+    outputfilename: Hashtags.txt
+  - type: SimpleText
+    instructions: Write a blog post approximately 1200 words long which covers the content of the message.  The goal of this blog post is to provide the same general content but in written form instead of video.  You can use a mild informal style - don't fully mimic the speaker, but imagine how they would write the blog if they were trying to be professional about their writing.
+    outputfilename: Blog.txt 
+  - type: VideoClipArray
+    instructions: Select 3 important quotable moments that we can use for short-form social media content.  Use direct transcript quotations ONLY, do not format or add notes or alter the original text in any way.
+    count: 3
+    outputfilename: Quotables.txt
+    videoclipnamepattern: quote
+    videoextension: .mp4
